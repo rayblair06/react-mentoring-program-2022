@@ -1,0 +1,3 @@
+{
+    "src/**/*.{js,jsx,ts,tsx,html}": ["eslint --fix", "prettier --write"]
+}
