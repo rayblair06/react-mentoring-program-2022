@@ -1,0 +1,38 @@
+#menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  line-height: 20px;
+  height: 60px;
+
+  ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      padding: 0 15px;
+    }
+  }
+
+  #filters {
+    display: flex;
+
+    p:nth-child(1) {
+      padding: 15px;
+      font-weight: 400;
+      color: #ffffff;
+      mix-blend-mode: normal;
+      opacity: 0.6;
+    }
+
+    p:nth-child(2) {
+      padding: 15px;
+      color: #ffffff;
+    }
+  }
+}
