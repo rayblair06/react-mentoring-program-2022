@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/app.scss';
 import WebFont from 'webfontloader';
 import PulpFictionPoster from '../images/pulp-fiction.png';
@@ -17,10 +17,11 @@ import MovieList from './Movie/MovieList';
 import LogoImage from '../images/netflixroulette.png';
 import Container from './Utilities/Container';
 import ErrorBoundary from './ErrorBoundary';
+import AddMovieModal from './Movie/AddMovieModal';
 
 WebFont.load({
   google: {
-    families: ['Montserrat:300,400,500,600,700', 'sans-serif'],
+    families: ['Montserrat:100,200,300,400,500,600,700', 'sans-serif'],
   },
 });
 
@@ -95,29 +96,43 @@ const movies = [
   },
 ];
 
-const App = () => (
-  <Page>
-    <Header>
-      <HeaderTop />
-      <HeaderMain />
-    </Header>
+const App = () => {
+  const [showAddMovieModal, setShowAddMovieModal] = useState(false);
 
-    <div className="header-trim" />
+  const handleOpen = () => {
+    setShowAddMovieModal(true);
+  };
 
-    <Container>
-      <Menu menu={menu} />
+  const handleClose = () => {
+    setShowAddMovieModal(false);
+  };
 
-      <div className="separator" />
+  return (
+    <Page>
+      <Header>
+        <HeaderTop setShowAddMovieModal={handleOpen} />
+        <HeaderMain />
+      </Header>
 
-      <ErrorBoundary>
-        <MovieList movies={movies} />
-      </ErrorBoundary>
-    </Container>
+      <div className="header-trim" />
 
-    <Footer>
-      <img src={LogoImage} alt={LogoImage} />
-    </Footer>
-  </Page>
-);
+      <Container>
+        <Menu menu={menu} />
+
+        <div className="separator" />
+
+        <AddMovieModal show={showAddMovieModal} handleClose={handleClose} />
+
+        <ErrorBoundary>
+          <MovieList movies={movies} />
+        </ErrorBoundary>
+      </Container>
+
+      <Footer>
+        <img src={LogoImage} alt={LogoImage} />
+      </Footer>
+    </Page>
+  );
+};
 
 export default App;
