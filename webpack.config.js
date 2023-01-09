@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.tsx",
+  entry: ["./src/index.tsx", "./src/styles/app.scss"],
   output: {
     filename: "app.js",
     path: path.join(__dirname, "/dist/"),
@@ -23,6 +23,19 @@ module.exports = {
             loader: "ts-loader",
           },
         ],
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: "file-loader",
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        type: "asset/resource",
+        generator: {
+          filename: "bundle.css",
+        },
+        use: ["sass-loader"],
       },
     ],
   },
