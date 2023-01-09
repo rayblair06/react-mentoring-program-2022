@@ -17,7 +17,9 @@ import MovieList from './Movie/MovieList';
 import LogoImage from '../images/netflixroulette.png';
 import Container from './Utilities/Container';
 import ErrorBoundary from './ErrorBoundary';
-import AddMovieModal from './Movie/AddMovieModal';
+import AddMovieModal from './Modals/AddMovieModal';
+import EditMovieModal from './Modals/EditMovieModal';
+import DeleteMovieModal from './Modals/DeleteMovieModal';
 
 WebFont.load({
   google: {
@@ -97,20 +99,20 @@ const movies = [
 ];
 
 const App = () => {
-  const [showAddMovieModal, setShowAddMovieModal] = useState(false);
+  const [showModal, setModal] = useState('');
 
-  const handleOpen = () => {
-    setShowAddMovieModal(true);
+  const handleOpenModal = (modal : any) => {
+    setModal(modal);
   };
 
-  const handleClose = () => {
-    setShowAddMovieModal(false);
+  const handleCloseModal = () => {
+    setModal('');
   };
 
   return (
     <Page>
       <Header>
-        <HeaderTop setShowAddMovieModal={handleOpen} />
+        <HeaderTop handleOpenModal={handleOpenModal} />
         <HeaderMain />
       </Header>
 
@@ -121,8 +123,6 @@ const App = () => {
 
         <div className="separator" />
 
-        <AddMovieModal show={showAddMovieModal} handleClose={handleClose} />
-
         <ErrorBoundary>
           <MovieList movies={movies} />
         </ErrorBoundary>
@@ -131,6 +131,10 @@ const App = () => {
       <Footer>
         <img src={LogoImage} alt={LogoImage} />
       </Footer>
+
+      <AddMovieModal show={(showModal === 'addMovieModal')} handleClose={handleCloseModal} />
+      <EditMovieModal show={(showModal === 'editMovieModal')} handleClose={handleCloseModal} />
+      <DeleteMovieModal show={(showModal === 'deleteMovieModal')} handleClose={handleCloseModal} />
     </Page>
   );
 };
